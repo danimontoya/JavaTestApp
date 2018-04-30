@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/title_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/blueTitle"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/description_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+            tools:text="This is library name"/>
+
+        <TextView
+            android:id="@+id/description_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/greyDescription"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_textview"
+            tools:text="This is library description a little This is library description a little bit longer than the title"/>
+
+        <TextView
+            android:id="@+id/language_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/greyDescription"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_textview"
+            tools:text="Language"
+            tools:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/stars_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@android:drawable/star_off"
+            android:gravity="center"
+            android:textColor="@color/greyDescription"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/language_textview"
+            app:layout_constraintTop_toBottomOf="@+id/description_textview"
+            tools:text="48"
+            />
+
+        <TextView
+            android:id="@+id/forks_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@android:drawable/ic_menu_set_as"
+            android:gravity="center"
+            android:textColor="@color/greyDescription"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/stars_textview"
+            app:layout_constraintTop_toBottomOf="@+id/description_textview"
+            tools:text="25"/>
+
+        <android.support.constraint.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="language_textview,forks_textview,stars_textview"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

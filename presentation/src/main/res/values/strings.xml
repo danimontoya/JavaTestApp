@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">JavaTestApp</string>
+
+    <string name="no_repositories_available">There are no repositories available at the moment, please try again..</string>
+</resources>

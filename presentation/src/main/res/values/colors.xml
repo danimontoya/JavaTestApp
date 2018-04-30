@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#24292e</color>
+    <color name="colorPrimaryDark">#FF2C2C2C</color>
+    <color name="colorAccent">#FFFFFFFF</color>
+
+    <!--Text colors-->
+    <color name="blueTitle">#0366d6</color>
+    <color name="greyDescription">#586069</color>
+
+    <!--Language colors-->
+    <color name="languague_java">#b07219</color>
+    <color name="languague_kotlin">#F18E33</color>
+    <color name="languague_shell">#89e051</color>
+    <color name="languague_javascript">#f1e05a</color>
+
+    <!--Others-->
+    <color name="white">#FFFFFFFF</color>
+    <color name="divider">#FFEDEDF1</color>
+</resources>

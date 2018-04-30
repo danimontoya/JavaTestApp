@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+
+    defaultConfig {
+        applicationId "com.danieh.javatestapp"
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    // Compile domain and data layers
+    implementation project(':domain')
+    implementation project(':data')
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:$androidSupportVersion"
+    implementation "com.android.support:support-annotations:$androidAnnotationVersion"
+    implementation "com.android.support:recyclerview-v7:$androidSupportVersion"
+
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+
+    testImplementation "junit:junit:$jUnitVersion"
+
+    androidTestImplementation "com.android.support:support-annotations:$androidSupportVersion"
+    androidTestImplementation "com.android.support.test:runner:$testRunner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+
+    // Dagger
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    // if you use the support libraries
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+}
