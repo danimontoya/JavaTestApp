@@ -9,11 +9,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
-import com.danieh.domain.model.Repository;
 import com.danieh.javatestapp.R;
 import com.danieh.javatestapp.databinding.ActivityMainBinding;
+import com.danieh.javatestapp.model.RepositoryModel;
 import com.danieh.javatestapp.ui.BaseActivity;
 import com.danieh.javatestapp.ui.main.adapter.RepoAdapter;
 import com.danieh.javatestapp.ui.main.adapter.RepoItemDecoration;
@@ -51,7 +52,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     }
 
     @Override
-    public void showRepositories(@NonNull List<Repository> repositories) {
+    public void showRepositories(@NonNull List<RepositoryModel> repositories) {
         adapter = new RepoAdapter(this, repositories);
         adapter.setHasStableIds(true);
         binding.repoRecyclerview.addItemDecoration(new RepoItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL, R.drawable.divider));
@@ -70,6 +71,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+                Log.d("ApiConnection", "ITEMS_BEFORE_RELOAD=" + ITEMS_BEFORE_RELOAD + ", ItemCount=" + recyclerView.getAdapter().getItemCount() +
+                        ", lastVisibleItemPosition=" + lastVisibleItemPosition);
                 boolean isTimeToLoadMoreItems = ITEMS_BEFORE_RELOAD >= recyclerView.getAdapter().getItemCount() - lastVisibleItemPosition;
                 if (!loadingNewItems && isTimeToLoadMoreItems) {
                     loadingNewItems = true;
@@ -95,7 +98,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     }
 
     @Override
-    public void showNewRepository(Repository repository) {
+    public void showNewRepository(RepositoryModel repository) {
         if (adapter != null)
             adapter.addRepository(repository);
     }

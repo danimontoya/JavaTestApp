@@ -2,7 +2,7 @@ package com.danieh.javatestapp.ui.views.repository;
 
 import android.support.annotation.NonNull;
 
-import com.danieh.domain.model.Repository;
+import com.danieh.javatestapp.model.RepositoryModel;
 
 /**
  * Created by danieh
@@ -17,11 +17,11 @@ public class RepositoryPresenter implements RepositoryView.Listener {
     }
 
     @Override
-    public void onBindView(@NonNull Repository repository, int adapterPosition) {
+    public void onBindView(@NonNull RepositoryModel repository, int adapterPosition) {
         if (view == null) return;
 
-        //view.showTitle("#" + adapterPosition + ": " + repository.getName());
-        view.showTitle(repository.getName());
+        view.showTitle("#" + adapterPosition + ": " + repository.getName());
+//        view.showTitle(repository.getName());
         view.showDescription(repository.getDescription());
 
         view.showLanguage(repository.getLanguage() != null ? repository.getLanguage() : "");

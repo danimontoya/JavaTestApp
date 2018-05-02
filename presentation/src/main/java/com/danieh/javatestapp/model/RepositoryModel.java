@@ -1,4 +1,4 @@
-package com.danieh.domain.model;
+package com.danieh.javatestapp.model;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
  * Created by danieh
  */
 
-public class Repository {
+public class RepositoryModel {
 
     @NonNull
     private Integer id;
@@ -22,7 +22,7 @@ public class Repository {
     @NonNull
     private String update;
 
-    public Repository(@NonNull Integer id, @NonNull String name, @NonNull String description, @Nullable String language, int stargazers, int forks, @NonNull String update) {
+    public RepositoryModel(@NonNull Integer id, @NonNull String name, @NonNull String description, @Nullable String language, int stargazers, int forks, @NonNull String update) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -91,5 +91,27 @@ public class Repository {
 
     public void setUpdate(@NonNull String update) {
         this.update = update;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RepositoryModel that = (RepositoryModel) o;
+
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + (language != null ? language.hashCode() : 0);
+        result = 31 * result + stargazers;
+        result = 31 * result + forks;
+        result = 31 * result + update.hashCode();
+        return result;
     }
 }

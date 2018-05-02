@@ -1,10 +1,13 @@
 package com.danieh.javatestapp.ui.main;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 
 import com.danieh.domain.model.Repository;
 import com.danieh.domain.usecases.DefaultObserver;
 import com.danieh.domain.usecases.LoadRepositoriesUseCase;
+import com.danieh.javatestapp.mapper.RepositoryModelDataMapper;
+import com.danieh.javatestapp.model.RepositoryModel;
 import com.danieh.javatestapp.ui.BasePresenter;
 
 import java.util.ArrayList;
@@ -20,17 +23,21 @@ import static com.danieh.data.net.RestApi.ITEMS_PER_PAGE;
 
 public class MainPresenter extends BasePresenter<MainView> implements MainView.Listener {
 
-    protected List<Repository> repositories = new ArrayList<>();
+    private List<RepositoryModel> repositories = new ArrayList<>();
 
     private int pageCount = 1;
 
     @NonNull
     private LoadRepositoriesUseCase loadRepositoriesUseCase;
 
+    @NonNull
+    private RepositoryModelDataMapper repositoryModelDataMapper;
+
     @Inject
-    public MainPresenter(@NonNull MainView view, @NonNull final LoadRepositoriesUseCase loadRepositoriesUseCase) {
+    public MainPresenter(@NonNull MainView view, @NonNull final LoadRepositoriesUseCase loadRepositoriesUseCase, @NonNull RepositoryModelDataMapper repositoryModelDataMapper) {
         super(view);
         this.loadRepositoriesUseCase = loadRepositoriesUseCase;
+        this.repositoryModelDataMapper = repositoryModelDataMapper;
     }
 
     @Override
@@ -47,38 +54,45 @@ public class MainPresenter extends BasePresenter<MainView> implements MainView.L
         loadRepositoriesUseCase.execute(new RepositoryListObserver(), pageCount);
     }
 
-    private void onRepositoriesRetrieved(List<Repository> newRepositoryList) {
+    @Override
+    public void destroy() {
+        super.destroy();
+        loadRepositoriesUseCase.dispose();
+    }
+
+    private void onRepositoriesRetrieved(List<Repository> repositoryList) {
         if (view == null) return;
-        if (this.repositories.isEmpty()) {
-            if (newRepositoryList == null || newRepositoryList.isEmpty())
-                view.showEmpty();
-            else {
-                this.repositories.addAll(newRepositoryList);
-                view.showRepositories(this.repositories);
-                pageCount++;
-                if (newRepositoryList.size() > ITEMS_PER_PAGE)
-                    view.removeScrollListener();
-            }
-        } else if (newRepositoryList != null && !newRepositoryList.isEmpty()) {
-            for (Repository repo : newRepositoryList) {
-                if (!repositories.contains(repo)) {
-                    this.repositories.add(repo);
-                    view.showNewRepository(repo);
+
+        if (repositories.isEmpty() && (repositoryList == null || repositoryList.isEmpty())) {
+            view.showEmpty();
+
+        } else if (repositoryList != null && !repositoryList.isEmpty()) {
+
+            List<RepositoryModel> repositoryModelList = repositoryModelDataMapper.transform(repositoryList);
+            if (repositories.isEmpty()) {
+                repositories.addAll(repositoryModelList);
+                view.showRepositories(repositoryModelList);
+            } else {
+                for (RepositoryModel repositoryModel : repositoryModelList) {
+                    if (!repositories.contains(repositoryModel)) {
+                        view.showNewRepository(repositoryModel);
+                        repositories.add(repositoryModel);
+                    }
                 }
             }
-            if (newRepositoryList.size() == ITEMS_PER_PAGE) {
+
+            if (repositoryList.size() == ITEMS_PER_PAGE) {
                 view.canLoadMore();
             } else {
                 view.removeScrollListener();
             }
-            pageCount++;
+            setPageCount(pageCount + 1);
         }
     }
 
-    @Override
-    public void destroy() {
-        super.destroy();
-        this.loadRepositoriesUseCase.dispose();
+    @VisibleForTesting
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
     }
 
     private final class RepositoryListObserver extends DefaultObserver<List<Repository>> {
@@ -100,8 +114,8 @@ public class MainPresenter extends BasePresenter<MainView> implements MainView.L
         }
 
         @Override
-        public void onNext(List<Repository> repositories) {
-            onRepositoriesRetrieved(repositories);
+        public void onNext(List<Repository> repositoryList) {
+            onRepositoriesRetrieved(repositoryList);
         }
     }
 }

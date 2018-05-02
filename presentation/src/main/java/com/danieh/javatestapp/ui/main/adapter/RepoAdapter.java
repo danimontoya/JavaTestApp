@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.danieh.domain.model.Repository;
 import com.danieh.javatestapp.R;
+import com.danieh.javatestapp.model.RepositoryModel;
 import com.danieh.javatestapp.ui.views.repository.RepositoryLayout;
 
 import java.lang.annotation.Retention;
@@ -32,13 +32,13 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private int loadingItem = 0;
     @NonNull
-    private List<Repository> repositories;
+    private List<RepositoryModel> repositories;
     @NonNull
     private RecyclerView recyclerView;
     @NonNull
     private Context context;
 
-    public RepoAdapter(@NonNull Context context, @NonNull final List<Repository> repositories) {
+    public RepoAdapter(@NonNull Context context, @NonNull final List<RepositoryModel> repositories) {
         this.context = context;
         this.repositories = repositories;
     }
@@ -115,10 +115,10 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         recyclerView.post(() -> notifyItemRemoved(getItemCount() - 1));
     }
 
-    public void addRepository(@NonNull Repository repository) {
+    public void addRepository(@NonNull RepositoryModel repository) {
         // hide loading view
         loadingItem = 0;
-        this.repositories.add(repository);
+        repositories.add(repository);
         recyclerView.post(() -> notifyItemInserted(getItemCount() - 1));
     }
 
@@ -136,7 +136,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             this.view = (RepositoryLayout) view;
         }
 
-        public void bind(final Repository item) {
+        public void bind(final RepositoryModel item) {
             view.bindView(item, getAdapterPosition());
         }
     }

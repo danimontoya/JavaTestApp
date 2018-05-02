@@ -19,7 +19,7 @@ public abstract class DataMapper<DA, DO> {
 
     @NonNull
     public List<DO> transform(@NonNull Collection<DA> dataEntities) {
-        final ArrayList<DO> result = new ArrayList<>();
+        final List<DO> result = new ArrayList<>();
 
         for (DA entity : dataEntities) {
             result.add(transform(entity));

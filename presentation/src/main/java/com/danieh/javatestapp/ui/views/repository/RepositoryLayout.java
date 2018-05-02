@@ -7,9 +7,9 @@ import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 
-import com.danieh.domain.model.Repository;
 import com.danieh.javatestapp.R;
 import com.danieh.javatestapp.databinding.LayoutRepoItemBinding;
+import com.danieh.javatestapp.model.RepositoryModel;
 
 /**
  * Created by danieh
@@ -40,7 +40,7 @@ public class RepositoryLayout extends ConstraintLayout implements RepositoryView
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.layout_repo_item, this, true);
     }
 
-    public void bindView(@NonNull Repository repository, int adapterPosition) {
+    public void bindView(@NonNull RepositoryModel repository, int adapterPosition) {
         presenter.onBindView(repository, adapterPosition);
     }
 

@@ -30,11 +30,6 @@ public class RepoDataRepository implements RepoRepository {
 
     @Override
     public Observable<List<Repository>> repositories(Integer pageCount) {
-        return repoDataStoreFactory.create().repoEntityList(pageCount).map(new Function<List<RepositoryEntity>, List<Repository>>() {
-            @Override
-            public List<Repository> apply(List<RepositoryEntity> dataEntities) throws Exception {
-                return repoEntityDataMapper.transform(dataEntities);
-            }
-        });
+        return repoDataStoreFactory.create().repoEntityList(pageCount).map(repoEntityDataMapper::transform);
     }
 }

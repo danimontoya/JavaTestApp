@@ -2,7 +2,7 @@ package com.danieh.javatestapp.ui.main;
 
 import android.support.annotation.NonNull;
 
-import com.danieh.domain.model.Repository;
+import com.danieh.javatestapp.model.RepositoryModel;
 
 import java.util.List;
 
@@ -12,13 +12,13 @@ import java.util.List;
 
 public interface MainView extends LoadDataView {
 
-    void showRepositories(@NonNull List<Repository> repositories);
+    void showRepositories(@NonNull List<RepositoryModel> repositories);
 
     void showLoadingItem();
 
     void removeLoadingItem();
 
-    void showNewRepository(Repository repository);
+    void showNewRepository(RepositoryModel repository);
 
     void canLoadMore();
 

@@ -2,7 +2,7 @@ package com.danieh.javatestapp.ui.views.repository;
 
 import android.support.annotation.NonNull;
 
-import com.danieh.domain.model.Repository;
+import com.danieh.javatestapp.model.RepositoryModel;
 
 /**
  * Created by danieh
@@ -24,7 +24,7 @@ public interface RepositoryView {
 
     interface Listener {
 
-        void onBindView(@NonNull Repository repository, int adapterPosition);
+        void onBindView(@NonNull RepositoryModel repository, int adapterPosition);
 
     }
 }
