@@ -44,6 +44,7 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
 
     testImplementation "junit:junit:$jUnitVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
     androidTestImplementation "com.android.support:support-annotations:$androidSupportVersion"
     androidTestImplementation "com.android.support.test:runner:$testRunner"
