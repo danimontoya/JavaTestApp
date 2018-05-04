@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -61,11 +62,10 @@ class ApiConnection implements Callable<String> {
     }
 
     private OkHttpClient createClient() {
-        final OkHttpClient okHttpClient = new OkHttpClient();
-//    okHttpClient.setReadTimeout(10000, TimeUnit.MILLISECONDS);
-//    okHttpClient.setConnectTimeout(15000, TimeUnit.MILLISECONDS);
-
-        return okHttpClient;
+        return new OkHttpClient.Builder()
+                .readTimeout(10000, TimeUnit.MILLISECONDS)
+                .connectTimeout(15000, TimeUnit.MILLISECONDS)
+                .build();
     }
 
     @Override

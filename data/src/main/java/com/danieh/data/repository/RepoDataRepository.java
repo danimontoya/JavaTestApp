@@ -1,6 +1,5 @@
 package com.danieh.data.repository;
 
-import com.danieh.data.entitiy.RepositoryEntity;
 import com.danieh.data.entitiy.mapper.RepositoryEntityDataMapper;
 import com.danieh.data.repository.datasource.RepoDataStoreFactory;
 import com.danieh.domain.model.Repository;
@@ -11,7 +10,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
 
 /**
  * Created by danieh

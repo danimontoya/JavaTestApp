@@ -11,23 +11,22 @@ import com.danieh.data.exception.NetworkConnectionException;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.reactivex.Observable;
 
 /**
  * {@link RestApi} implementation for retrieving data from the network.
  */
+@Singleton
 public class RestApiImpl implements RestApi {
 
     private final Context context;
     private final RepositoryEntityJsonMapper repoEntityJsonMapper;
 
-    /**
-     * Constructor of the class
-     *
-     * @param context              {@link Context}.
-     * @param repoEntityJsonMapper {@link RepositoryEntityJsonMapper}.
-     */
-    public RestApiImpl(Context context, RepositoryEntityJsonMapper repoEntityJsonMapper) {
+    @Inject
+    RestApiImpl(Context context, RepositoryEntityJsonMapper repoEntityJsonMapper) {
         if (context == null || repoEntityJsonMapper == null) {
             throw new IllegalArgumentException("The constructor parameters cannot be null!!!");
         }

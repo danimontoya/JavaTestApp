@@ -29,6 +29,6 @@ class CloudRepoDataStore implements RepoDataStore {
 
     @Override
     public Observable<List<RepositoryEntity>> repoEntityList(Integer pageCount) {
-        return this.restApi.repoEntityList(pageCount).doOnNext(repositoryCache::put);
+        return restApi.repoEntityList(pageCount).doOnNext(repositoryCache::put);
     }
 }

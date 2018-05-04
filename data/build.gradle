@@ -37,7 +37,10 @@ dependencies {
     implementation "javax.inject:javax.inject:$javaxInjectVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:$jUnitVersion"
+    testImplementation "org.assertj:assertj-core:$assertJVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

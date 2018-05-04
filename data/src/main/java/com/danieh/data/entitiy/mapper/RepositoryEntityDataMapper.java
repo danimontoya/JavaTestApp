@@ -17,7 +17,7 @@ import javax.inject.Singleton;
 public class RepositoryEntityDataMapper extends DataMapper<RepositoryEntity, Repository> {
 
     @Inject
-    RepositoryEntityDataMapper() {
+    public RepositoryEntityDataMapper() {
     }
 
     @NonNull

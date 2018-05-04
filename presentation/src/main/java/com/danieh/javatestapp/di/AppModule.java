@@ -6,6 +6,8 @@ import android.content.Context;
 import com.danieh.data.cache.RepositoryCache;
 import com.danieh.data.cache.RepositoryCacheImpl;
 import com.danieh.data.executor.JobExecutor;
+import com.danieh.data.net.RestApi;
+import com.danieh.data.net.RestApiImpl;
 import com.danieh.data.repository.RepoDataRepository;
 import com.danieh.domain.executor.PostExecutionThread;
 import com.danieh.domain.executor.ThreadExecutor;
@@ -59,6 +61,12 @@ public class AppModule {
     @Singleton
     RepositoryCache provideRepositoryCache(RepositoryCacheImpl repositoryCache) {
         return repositoryCache;
+    }
+
+    @Provides
+    @Singleton
+    RestApi provideRestApi(RestApiImpl restApi) {
+        return restApi;
     }
 
     @Provides

@@ -17,18 +17,14 @@ import javax.inject.Singleton;
 @Singleton
 public class RepoDataStoreFactory {
 
-    private final Context context;
     private final RepositoryCache repositoryCache;
 
-    private final RepositoryEntityJsonMapper entityJsonMapper;
     private final RestApi restApi;
 
     @Inject
-    RepoDataStoreFactory(@NonNull Context context, @NonNull RepositoryCache repositoryCache) {
-        this.context = context.getApplicationContext();
+    RepoDataStoreFactory(@NonNull Context context, @NonNull RepositoryCache repositoryCache, @NonNull RestApi restApi) {
         this.repositoryCache = repositoryCache;
-        this.entityJsonMapper = new RepositoryEntityJsonMapper();
-        this.restApi = new RestApiImpl(context, entityJsonMapper);
+        this.restApi = restApi;
     }
 
     public RepoDataStore create() {
